@@ -9,7 +9,7 @@ body {
 .wrapper {
   padding: 25px;
   width: 450px;
-  height: 570px;
+  height: 565px;
   background-color: rgb(235, 235, 235);
   border-radius: 15px;
 }
@@ -27,6 +27,32 @@ body {
   align-items: center;
   width: calc(100% / 4 - 10px);
   height: calc(100% / 4 - 10px);
+  position: relative;
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-13px);
+  }
+  40% {
+    transform: translateX(13px);
+  }
+  60% {
+    transform: translateX(-8px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 .view {
   display: flex;
@@ -37,11 +63,19 @@ body {
   height: 100%;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-.front-view {
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.3s linear;
+  pointer-events: none;
 }
 .back-view {
-  display: none;
+  transform: rotateY(-180deg);
+}
+.flip .back-view {
+  transform: rotateY(0deg);
+}
+.flip .front-view {
+  transform: rotateY(180deg);
 }
 .card__img {
   max-width: 50px;
@@ -73,13 +107,13 @@ body {
 .score__flips {
 }
 .score__flips-value {
-  font-weight: 600;
+  font-weight: 550;
 }
 .refresh__btn {
   padding: 5px 13px;
-  color: rgb(52, 12, 139);
+  color: rgb(59, 14, 157);
   font-size: 16px;
   background-color: rgb(241, 241, 241);
   border-radius: 4px;
-  border: 1.5px solid rgb(52, 12, 139);
+  border: 1.5px solid rgb(59, 14, 157);
 }
